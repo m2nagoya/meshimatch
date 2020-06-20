@@ -1,0 +1,23 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.3/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCY2xmJQmxKVtV0kcyS9UccAWBDYAHMCv4",
+    authDomain: "meshimatch-47632.firebaseapp.com",
+    databaseURL: "https://meshimatch-47632.firebaseio.com",
+    projectId: "meshimatch-47632",
+    storageBucket: "meshimatch-47632.appspot.com",
+    messagingSenderId: "7175435560",
+    appId: "1:7175435560:web:32d216284133908a8ccc1d",
+    measurementId: "G-PKSJ0GG52X"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>

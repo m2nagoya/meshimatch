@@ -1,15 +1,20 @@
+# coding: utf-8
+
 import pyrebase
-import flask
+from flask import Flask, render_template, request
+import os
+
+app = Flask(__name__)
 
 config = {
-    apiKey: "AIzaSyCY2xmJQmxKVtV0kcyS9UccAWBDYAHMCv4",
-    authDomain: "meshimatch-47632.firebaseapp.com",
-    databaseURL: "https://meshimatch-47632.firebaseio.com",
-    projectId: "meshimatch-47632",
-    storageBucket: "meshimatch-47632.appspot.com",
-    messagingSenderId: "7175435560",
-    appId: "1:7175435560:web:32d216284133908a8ccc1d",
-    measurementId: "G-PKSJ0GG52X"
+    "apiKey": "AIzaSyCY2xmJQmxKVtV0kcyS9UccAWBDYAHMCv4",
+    "authDomain": "meshimatch-47632.firebaseapp.com",
+    "databaseURL": "https://meshimatch-47632.firebaseio.com",
+    "projectId": "meshimatch-47632",
+    "storageBucket": "meshimatch-47632.appspot.com",
+    "messagingSenderId": "7175435560",
+    "appId": "1:7175435560:web:32d216284133908a8ccc1d",
+    "measurementId": "G-PKSJ0GG52X"
 }
 
 firebase = pyrebase.initialize_app(config)
@@ -18,11 +23,8 @@ db = firebase.database()
 # db.child("names").push({"name":"kota"})
 # db.child("names").push({"name":"take"})
 
-
 # ルートを指定、メソッドはGET、POST
 @app.route('/', methods=['GET', 'POST'])
-
-# basic関数を定義
 def basic():
     # POSTでリクエストされたら
     if request.method == 'POST':
@@ -48,5 +50,6 @@ def basic():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    #処理の実行
-    app.run(debug=True)
+    app.debug = True
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

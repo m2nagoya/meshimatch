@@ -3,6 +3,7 @@
 import pyrebase
 from flask import Flask, render_template, request
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -23,31 +24,17 @@ db = firebase.database()
 # db.child("names").push({"name":"kota"})
 # db.child("names").push({"name":"take"})
 
+geo_request_url = 'https://get.geojs.io/v1/ip/geo.json'
+geo_data = requests.get(geo_request_url).json()
+
 # ルートを指定、メソッドはGET、POST
 @app.route('/', methods=['GET', 'POST'])
-def basic():
-    # POSTでリクエストされたら
-    if request.method == 'POST':
-        # form['submit']のvalueが'add'であれば
-        if request.form['submit'] == 'add':
-            # formから値を取得
-            name = request.form['name']
-            # 値をfirebase上のtodoに書き込む
-            db.child("todo").push(name)
-            # firebaseから値を取得
-            todo = db.child("todo").get()
-            # toに値を代入
-            to = todo.val()
-            # index.htmlに 値toを返す
-            return render_template('index.html', t=to.values())
-        # form['submit']のvalueが'delete'であれば
-        elif request.form['submit'] == 'delete':
-            # firebaseのdbであるtodoを削除
-            db.child("todo").remove()
-            # 元のindex.htmlを返す
-            return render_template('index.html',)
-    # それ以外は、index.htmlを返す
-    return render_template('index.html')
+def index():
+    return render_template('./index.html',lat = geo_data['latitude'], log=geo_data['longitude'])
+
+@app.route('/result', methods=['POST'])
+def result():
+    render_template('./result.html')
 
 if __name__ == '__main__':
     app.debug = True

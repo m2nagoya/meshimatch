@@ -6,20 +6,7 @@
     <link rel="shortcut icon" href="">
 </head>
 <body>
-  <script type="text/javascript">
-  navigator.geolocation.watchPosition((position) => {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    var acc = position.coords.accuracy;
-    // sendLocation(lat, lng, acc, route_id);
-    var gps = document.getElementById("gps");
-    gps.innerHTML = "緯度:" + lat + ' 経度' + lng + ' 精度' + acc ;
-  }, (error) => {
-    alert('GPS情報が取得できません．権限を確認してください')
-  }, {
-    enableHighAccuracy: true
-  });
-  </script>
-  <div id="gps"></div>
+  経度 {{ lat }} <br>
+  緯度 {{ log }}
 </body>
 </html>
